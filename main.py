@@ -36,23 +36,20 @@ def cost_function(params_values):
     circ = transpile(Circuit, simulator)
 
     # Run and get counts
-    result = simulator.run(circ,shots=1000).result()
+    result = simulator.run(circ,shots=100).result()
     counts = result.get_counts(circ)
     
     # Calculate the probability of getting measurement outcome '1' on the last qubit
     try:
-        prob = counts['1']/1000
+        prob = counts['1']/100
     except:
         prob = 0
-    
     cost = 1 - prob
-
     print('Cost function value:', cost)
-
     return cost
 
 # Initialize the COBYLA optimizer
-opt = COBYLA()
+opt = COBYLA(maxiter=150, disp=True, tol=0.1)
 num_parameters = Circuit.num_parameters
 initial_point = np.random.rand(num_parameters)  # Set the initial parameters
 print('Number of parameters in quantum circuit: ',Circuit.num_parameters)
