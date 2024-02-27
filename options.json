@@ -1,0 +1,6 @@
+{
+    "MODE": "TEST",
+    "NOISY": false,
+    "DEPTH": 10,
+    "ITERATIONS": 500
+}
