@@ -36,9 +36,12 @@ print("Option namelist loaded")
 
 if MODE == "TRAIN" and NOISY:
     warnings.warn("NOISY is set to True during training, this will affect the optimization process")
-    print("Do you want to continue? [y/n]")
-    if input() != "y" or input() != "Y":
+
+    user_input = input("Do you want to continue? [y/n]: ")
+    if user_input.lower() == "n":
         exit()
+    else:
+        print("Starting...")
 
 print("Mode:", MODE)
 print("Noisy:", NOISY)
@@ -46,9 +49,12 @@ if MODE == "TRAIN":
     print("Depth:", depth)
     print("Iterations:", ITERATIONS)
     print("Do you want to continue? [y/n]")
-    if input() != "y" or input() != "Y":
+    user_input = input()
+    if user_input.lower() != "y":
         exit()
-print()
+    else:
+        print("Starting...")
+        print()
 
 #--------------------------------------------
 
@@ -227,6 +233,10 @@ for image, label in zip(test_images, test_labels):
         ax2.set_title("Noisy Data")
         ax3.imshow(output_sv)
         ax3.set_title("Output Data")
+        cax = fig.add_axes([0.95, 0.15, 0.03, 0.7])
+        cbar = fig.colorbar(ax3.imshow(output_sv), cax=cax, ax=ax3)
+        cbar.set_label('Probability')
+        plt.show()
         plt.savefig(f'./DATA/{1-i}_image.png')
         print(f'Image saved to file: ./DATA/{1-i}_image.png')
 
