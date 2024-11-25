@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from scipy.signal import correlate2d
 
 
-from qiskit import QuantumCircuit, Aer, transpile, assemble
+from qiskit import QuantumCircuit, transpile, assemble
+from qiskit_aer import Aer
 from qiskit.circuit.library import RealAmplitudes
 from qiskit_machine_learning.neural_networks import SamplerQNN 
 from myquantum import *
@@ -45,6 +46,7 @@ if MODE == "TRAIN" and NOISY:
 
 print("Mode:", MODE)
 print("Noisy:", NOISY)
+
 if MODE == "TRAIN":
     print("Depth:", depth)
     print("Iterations:", ITERATIONS)
